@@ -20,17 +20,25 @@
     <style>
         :root {
             --amarelo: #FFC72C;
+            --amarelo-claro: #FFD75E;
             --amarelo-escuro: #E5A800;
             --preto: #0A0A0A;
             --preto-suave: #1A1A1A;
             --cinza-escuro: #2A2A2A;
-            --cinza-medio: #4A4A4A;
+            --cinza-medio: #5A5A5A;
             --cinza-claro: #E8E8E8;
-            --cinza-bg: #F5F5F5;
+            --cinza-bg: #F7F7F5;
             --branco: #FFFFFF;
             --whatsapp: #25D366;
-            --sombra: 0 10px 40px rgba(0,0,0,0.12);
-            --sombra-forte: 0 20px 60px rgba(0,0,0,0.25);
+            /* Sombras em camadas (mais realistas) */
+            --sombra-sm: 0 2px 8px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.06);
+            --sombra: 0 4px 16px rgba(0,0,0,0.06), 0 2px 6px rgba(0,0,0,0.04);
+            --sombra-md: 0 12px 28px rgba(0,0,0,0.08), 0 6px 12px rgba(0,0,0,0.06);
+            --sombra-forte: 0 24px 48px rgba(0,0,0,0.12), 0 12px 24px rgba(0,0,0,0.08);
+            --sombra-amarela: 0 12px 30px rgba(255,199,44,0.28);
+            /* Curva de animação premium */
+            --ease: cubic-bezier(0.16, 1, 0.3, 1);
+            --raio: 12px;
         }
 
         * {
@@ -49,6 +57,14 @@
             background: var(--branco);
             line-height: 1.6;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        ::selection {
+            background: var(--amarelo);
+            color: var(--preto);
         }
 
         /* CATÁLOGO - CARDS DETALHADOS */
@@ -69,13 +85,13 @@
 
         .cat-card {
             background: var(--branco);
-            border-radius: 8px;
+            border-radius: var(--raio);
             overflow: hidden;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-            transition: all 0.4s;
+            box-shadow: var(--sombra);
+            transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease), border-color 0.5s var(--ease);
             display: flex;
             flex-direction: column;
-            border: 2px solid transparent;
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
         .catalogo-alt .cat-card {
@@ -83,14 +99,14 @@
         }
 
         .cat-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+            transform: translateY(-10px);
+            box-shadow: var(--sombra-forte);
             border-color: var(--amarelo);
         }
 
         .cat-card-image {
             height: 220px;
-            background: linear-gradient(135deg, #f8f8f8 0%, #ececec 100%);
+            background: linear-gradient(135deg, #fbfbfb 0%, #eeeeee 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -497,12 +513,12 @@
         .hero::before {
             content: '';
             position: absolute;
-            top: 0;
-            right: 0;
-            width: 60%;
-            height: 100%;
-            background: linear-gradient(135deg, transparent 0%, rgba(255, 199, 44, 0.08) 50%, transparent 100%);
-            clip-path: polygon(20% 0, 100% 0, 100% 100%, 0 100%);
+            top: -20%;
+            right: -10%;
+            width: 55%;
+            height: 120%;
+            background: radial-gradient(ellipse at center, rgba(255,199,44,0.14) 0%, rgba(255,199,44,0.04) 40%, transparent 70%);
+            pointer-events: none;
         }
 
         .hero::after {
@@ -513,7 +529,11 @@
             width: 100%;
             height: 100%;
             background-image:
-                repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,199,44,0.03) 35px, rgba(255,199,44,0.03) 36px);
+                linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+            background-size: 48px 48px;
+            mask-image: radial-gradient(ellipse at 30% 50%, #000 0%, transparent 75%);
+            -webkit-mask-image: radial-gradient(ellipse at 30% 50%, #000 0%, transparent 75%);
             pointer-events: none;
         }
 
@@ -530,16 +550,20 @@
         }
 
         .hero-tag {
-            display: inline-block;
-            background: var(--amarelo);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--amarelo-claro), var(--amarelo));
             color: var(--preto);
-            padding: 8px 18px;
+            padding: 9px 20px;
             font-weight: 800;
             font-size: 13px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 24px;
+            margin-bottom: 26px;
             font-family: 'Barlow Condensed', sans-serif;
+            border-radius: 100px;
+            box-shadow: 0 6px 20px rgba(255,199,44,0.3);
         }
 
         .hero h1 {
@@ -554,6 +578,18 @@
             color: var(--amarelo);
             display: inline-block;
             position: relative;
+        }
+
+        .hero h1 .destaque::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 4px;
+            width: 100%;
+            height: 6px;
+            background: rgba(255,199,44,0.25);
+            border-radius: 3px;
+            z-index: -1;
         }
 
         .hero p {
@@ -574,7 +610,7 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            padding: 16px 32px;
+            padding: 17px 34px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -582,60 +618,66 @@
             font-size: 15px;
             border: none;
             cursor: pointer;
-            transition: all 0.3s;
-            border-radius: 4px;
+            transition: all 0.4s var(--ease);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Efeito de brilho ao passar o mouse */
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.6s var(--ease);
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn-primary {
-            background: var(--amarelo);
+            background: linear-gradient(135deg, var(--amarelo-claro) 0%, var(--amarelo) 50%, var(--amarelo-escuro) 100%);
             color: var(--preto);
-            box-shadow: 0 8px 25px rgba(255, 199, 44, 0.35);
+            box-shadow: var(--sombra-amarela);
         }
 
         .btn-primary:hover {
-            background: var(--branco);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(255, 199, 44, 0.5);
+            transform: translateY(-4px);
+            box-shadow: 0 18px 40px rgba(255,199,44,0.45);
         }
 
         .btn-secondary {
-            background: transparent;
+            background: rgba(255,255,255,0.05);
             color: var(--branco);
-            border: 2px solid var(--branco);
+            border: 2px solid rgba(255,255,255,0.6);
+            backdrop-filter: blur(4px);
         }
 
         .btn-secondary:hover {
             background: var(--branco);
             color: var(--preto);
+            border-color: var(--branco);
+            transform: translateY(-4px);
         }
 
         .btn-whatsapp {
-            background: var(--whatsapp);
+            background: linear-gradient(135deg, #2ee06f 0%, var(--whatsapp) 100%);
             color: var(--branco);
+            box-shadow: 0 12px 30px rgba(37,211,102,0.3);
         }
 
         .btn-whatsapp:hover {
-            background: #1ea855;
-            transform: translateY(-3px);
+            transform: translateY(-4px);
+            box-shadow: 0 18px 40px rgba(37,211,102,0.42);
         }
 
         .hero-image {
             position: relative;
-        }
-
-        .hero-image-wrapper {
-            position: relative;
-            background: linear-gradient(135deg, var(--amarelo) 0%, var(--amarelo-escuro) 100%);
-            border-radius: 8px;
-            padding: 30px;
-            transform: rotate(-2deg);
-            box-shadow: var(--sombra-forte);
-        }
-
-        .hero-image-svg {
-            width: 100%;
-            height: auto;
-            display: block;
         }
 
         .hero-image-real {
@@ -646,17 +688,16 @@
             object-fit: contain;
             background: linear-gradient(135deg, #fafafa 0%, #ececec 100%);
             display: block;
-            border-radius: 6px;
+            border-radius: var(--raio);
             padding: 32px 28px;
             image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
         }
 
         .hero-image-wrapper {
             overflow: hidden;
             position: relative;
-            border-radius: 6px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+            border-radius: var(--raio);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.45), 0 12px 24px rgba(0,0,0,0.3);
         }
 
         .hero-image-wrapper::before {
@@ -697,8 +738,9 @@
 
         /* BARRA DE DIFERENCIAIS */
         .diferenciais-bar {
-            background: var(--amarelo);
-            padding: 30px 0;
+            background: linear-gradient(135deg, var(--amarelo-claro) 0%, var(--amarelo) 50%, var(--amarelo-escuro) 100%);
+            padding: 34px 0;
+            position: relative;
         }
 
         .diferenciais-container {
@@ -707,7 +749,7 @@
             padding: 0 20px;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
+            gap: 20px;
         }
 
         .diferencial-item {
@@ -715,11 +757,30 @@
             align-items: center;
             gap: 16px;
             color: var(--preto);
+            padding: 4px 20px;
+            position: relative;
+            transition: transform 0.3s var(--ease);
+        }
+
+        .diferencial-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 44px;
+            background: rgba(10,10,10,0.15);
+        }
+
+        .diferencial-item:hover {
+            transform: translateY(-3px);
         }
 
         .diferencial-item i {
             font-size: 36px;
             color: var(--preto);
+            flex-shrink: 0;
         }
 
         .diferencial-item h4 {
@@ -752,23 +813,35 @@
         }
 
         .section-tag {
-            display: inline-block;
-            background: var(--amarelo);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--amarelo-claro), var(--amarelo));
             color: var(--preto);
-            padding: 6px 16px;
+            padding: 7px 18px;
             font-size: 12px;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
             font-family: 'Barlow Condensed', sans-serif;
+            border-radius: 100px;
+            box-shadow: 0 4px 14px rgba(255,199,44,0.3);
+        }
+
+        .section-tag::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--preto);
         }
 
         .section-title {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-size: clamp(2rem, 4vw, 3.4rem);
             line-height: 1;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
             letter-spacing: 1px;
         }
 
@@ -781,6 +854,7 @@
             font-size: 17px;
             max-width: 700px;
             margin: 0 auto;
+            line-height: 1.7;
         }
 
         /* SOBRE */
@@ -925,16 +999,17 @@
 
         .equip-card {
             background: var(--branco);
-            border-radius: 8px;
+            border-radius: var(--raio);
             overflow: hidden;
-            transition: all 0.4s;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+            transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
+            box-shadow: var(--sombra);
             position: relative;
+            border: 1px solid rgba(0,0,0,0.04);
         }
 
         .equip-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            transform: translateY(-12px);
+            box-shadow: var(--sombra-forte);
         }
 
         .equip-card-image {
@@ -1681,6 +1756,11 @@
 
             .diferenciais-container {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+            }
+
+            .diferencial-item:nth-child(2)::after {
+                display: none;
             }
 
             .footer-grid {
@@ -1756,6 +1836,11 @@
         @media (max-width: 480px) {
             .diferenciais-container {
                 grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .diferencial-item::after {
+                display: none !important;
             }
 
             .logo {
@@ -1766,13 +1851,32 @@
         /* ANIMAÇÕES DE ENTRADA */
         .fade-up {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease-out;
+            transform: translateY(40px);
+            transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+            will-change: opacity, transform;
         }
 
         .fade-up.visible {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* Delay escalonado para cards em grade */
+        .equipamentos-grid .fade-up:nth-child(2),
+        .catalogo-grid .fade-up:nth-child(2),
+        .servicos-grid .fade-up:nth-child(2),
+        .depoimentos-grid .fade-up:nth-child(2) { transition-delay: 0.08s; }
+        .equipamentos-grid .fade-up:nth-child(3),
+        .catalogo-grid .fade-up:nth-child(3),
+        .servicos-grid .fade-up:nth-child(3),
+        .depoimentos-grid .fade-up:nth-child(3) { transition-delay: 0.16s; }
+        .catalogo-grid .fade-up:nth-child(4),
+        .servicos-grid .fade-up:nth-child(4) { transition-delay: 0.24s; }
+        .catalogo-grid .fade-up:nth-child(5) { transition-delay: 0.32s; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .fade-up { opacity: 1; transform: none; transition: none; }
+            * { animation: none !important; }
         }
     </style>
 </head>
@@ -1782,8 +1886,8 @@
     <div class="topbar">
         <div class="topbar-container">
             <div class="topbar-info">
-                <span><i class="fas fa-phone"></i> (62) 9999-9999</span>
-                <span><i class="fas fa-envelope"></i> contato@metalloc.com.br</span>
+                <span><i class="fas fa-phone"></i> (61) 98247-9816</span>
+                <span><i class="fas fa-envelope"></i> comercialmetalloc@gmail.com</span>
                 <span><i class="fas fa-clock"></i> Seg a Sex: 7h às 18h | Sáb: 8h às 12h</span>
             </div>
             <div class="topbar-social">
@@ -1821,7 +1925,7 @@
                 <h1>Soluções em <span class="destaque">Altura</span> com Segurança e Performance</h1>
                 <p>Locação de plataformas elevatórias tipo tesoura, articuladas e telescópicas. Equipamentos modernos, frota própria e atendimento ágil para sua obra ou operação industrial.</p>
                 <div class="hero-buttons">
-                    <a href="https://wa.me/5562999999999?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento%20de%20loca%C3%A7%C3%A3o." class="btn btn-primary" target="_blank">
+                    <a href="https://wa.me/5561982479816?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento%20de%20loca%C3%A7%C3%A3o." class="btn btn-primary" target="_blank">
                         <i class="fas fa-calculator"></i> Solicitar Orçamento
                     </a>
                     <a href="#equipamentos" class="btn btn-secondary">
@@ -2269,11 +2373,11 @@
                     <p>Fale com nossos consultores e receba seu orçamento em minutos.</p>
                 </div>
                 <div class="cta-actions">
-                    <a href="https://wa.me/5562999999999?text=Ol%C3%A1!%20Preciso%20de%20um%20equipamento%20com%20urg%C3%AAncia." class="btn btn-whatsapp" target="_blank">
+                    <a href="https://wa.me/5561982479816?text=Ol%C3%A1!%20Preciso%20de%20um%20equipamento%20com%20urg%C3%AAncia." class="btn btn-whatsapp" target="_blank">
                         <i class="fab fa-whatsapp"></i> WhatsApp
                     </a>
-                    <a href="tel:+5562999999999" class="btn">
-                        <i class="fas fa-phone"></i> (62) 9999-9999
+                    <a href="tel:+5561982479816" class="btn">
+                        <i class="fas fa-phone"></i> (61) 98247-9816
                     </a>
                 </div>
             </div>
@@ -2436,22 +2540,22 @@
                             <i class="fas fa-map-marker-alt"></i>
                             <div>
                                 <h4>Nosso Endereço</h4>
-                                <p>Av. Principal, 1234 - Centro<br>Inhumas - GO, CEP 75400-000</p>
+                                <p>Quadra AC 219, Bloco D, Lote 24<br>Santa Maria - DF, CEP 72509-204</p>
                             </div>
                         </li>
                         <li>
                             <i class="fas fa-phone"></i>
                             <div>
                                 <h4>Telefone & WhatsApp</h4>
-                                <a href="tel:+5562999999999">(62) 9999-9999</a><br>
-                                <a href="https://wa.me/5562999999999" target="_blank">WhatsApp Direto</a>
+                                <a href="tel:+5561982479816">(61) 98247-9816</a><br>
+                                <a href="https://wa.me/5561982479816" target="_blank">WhatsApp Direto</a>
                             </div>
                         </li>
                         <li>
                             <i class="fas fa-envelope"></i>
                             <div>
                                 <h4>E-mail Comercial</h4>
-                                <a href="mailto:contato@metalloc.com.br">contato@metalloc.com.br</a>
+                                <a href="mailto:comercialmetalloc@gmail.com">comercialmetalloc@gmail.com</a>
                             </div>
                         </li>
                         <li>
@@ -2549,15 +2653,15 @@
                     <ul class="footer-contact-list">
                         <li>
                             <i class="fas fa-map-marker-alt"></i>
-                            <span>Av. Principal, 1234 - Centro<br>Inhumas - GO, CEP 75400-000</span>
+                            <span>Quadra AC 219, Bloco D, Lote 24<br>Santa Maria - DF, CEP 72509-204</span>
                         </li>
                         <li>
                             <i class="fas fa-phone"></i>
-                            <span>(62) 9999-9999</span>
+                            <span>(61) 98247-9816</span>
                         </li>
                         <li>
                             <i class="fas fa-envelope"></i>
-                            <span>contato@metalloc.com.br</span>
+                            <span>comercialmetalloc@gmail.com</span>
                         </li>
                         <li>
                             <i class="fas fa-clock"></i>
@@ -2574,7 +2678,7 @@
     </footer>
 
     <!-- WHATSAPP FLUTUANTE -->
-    <a href="https://wa.me/5562999999999?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+    <a href="https://wa.me/5561982479816?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." class="whatsapp-float" target="_blank" aria-label="WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
 
@@ -2609,7 +2713,7 @@
             texto += `*Equipamento:* ${equipamento}%0A`;
             if (mensagem) texto += `*Detalhes:* ${mensagem}%0A`;
 
-            const url = `https://wa.me/5562999999999?text=${texto}`;
+            const url = `https://wa.me/5561982479816?text=${texto}`;
             window.open(url, '_blank');
         }
 
@@ -2622,7 +2726,7 @@
             });
         }, { threshold: 0.1 });
 
-        document.querySelectorAll('.equip-card, .servico-card, .aplicacao-item, .depoimento-card').forEach(el => {
+        document.querySelectorAll('.equip-card, .cat-card, .servico-card, .aplicacao-item, .depoimento-card').forEach(el => {
             el.classList.add('fade-up');
             observer.observe(el);
         });
