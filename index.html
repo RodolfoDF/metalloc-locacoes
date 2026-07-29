@@ -5,7 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Metal Loc - Locação de Plataformas Elevatórias e Equipamentos</title>
     <meta name="description" content="Metal Loc - Especializada em locação de plataformas elevatórias tipo tesoura, articuladas e telescópicas. Equipamentos modernos, seguros e com entrega ágil.">
-    <meta name="keywords" content="locação plataforma elevatória, aluguel plataforma tesoura, plataforma articulada, plataforma telescópica, locação equipamentos, Metal Loc">
+    <meta name="keywords" content="locação plataforma elevatória, aluguel plataforma tesoura, plataforma articulada, plataforma telescópica, locação equipamentos, Metal Loc, Brasília, DF">
+    <link rel="canonical" href="https://metalloclocacoes.com.br/">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph (preview ao compartilhar no WhatsApp, Facebook, LinkedIn) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://metalloclocacoes.com.br/">
+    <meta property="og:title" content="Metal Loc - Locação de Plataformas Elevatórias | Brasília e Entorno">
+    <meta property="og:description" content="Locação de plataformas elevatórias tipo tesoura, articuladas e telescópicas. Frota própria, entrega ágil e suporte técnico em Brasília e entorno.">
+    <meta property="og:image" content="https://metalloclocacoes.com.br/images/hero-plataformas.jpg">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Metal Loc Locações">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Metal Loc - Locação de Plataformas Elevatórias">
+    <meta name="twitter:description" content="Plataformas elevatórias para locação em Brasília e entorno. Frota própria e atendimento ágil.">
+    <meta name="twitter:image" content="https://metalloclocacoes.com.br/images/hero-plataformas.jpg">
+
+    <!-- ============================================================
+         GOOGLE ANALYTICS (GA4)
+         >> SUBSTITUA G-XXXXXXXXXX pelo seu ID de medição do GA4 <<
+         ============================================================ -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <!-- Dados estruturados: ajuda o Google a entender o negócio (SEO local) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Metal Loc Locações de Equipamentos",
+      "image": "https://metalloclocacoes.com.br/logo_site_metal_loc.png",
+      "url": "https://metalloclocacoes.com.br/",
+      "telephone": "+5561992886995",
+      "email": "comercial@metalloclocacoes.com.br",
+      "description": "Locação de plataformas elevatórias tipo tesoura, articuladas e telescópicas em Brasília e entorno.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Quadra AC 219, Bloco D, Lote 24",
+        "addressLocality": "Santa Maria",
+        "addressRegion": "DF",
+        "postalCode": "72509-204",
+        "addressCountry": "BR"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+          "opens": "07:00",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "08:00",
+          "closes": "12:00"
+        }
+      ],
+      "areaServed": ["Brasília","Distrito Federal","Entorno do DF"]
+    }
+    </script>
 
     <!-- Fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -243,13 +307,37 @@
         @media (max-width: 560px) {
             .catalogo-grid,
             .catalogo-grid-4 {
-                grid-template-columns: 1fr;
-                gap: 20px;
-                max-width: 420px;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 14px;
+                max-width: 100%;
             }
 
             .cat-card-image {
-                height: 220px;
+                height: 130px;
+            }
+
+            .cat-card-body {
+                padding: 16px 13px;
+            }
+
+            .cat-card-title {
+                font-size: 14px;
+                margin-bottom: 12px;
+                line-height: 1.2;
+            }
+
+            .cat-specs li {
+                font-size: 11.5px;
+                padding: 3px 0;
+            }
+
+            .cat-specs {
+                margin-bottom: 14px;
+            }
+
+            .cat-link {
+                font-size: 12px;
+                padding-top: 10px;
             }
         }
 
@@ -1815,22 +1903,128 @@
 
             .menu-mobile {
                 display: block;
+                position: absolute;
+                right: 18px;
+                top: 50%;
+                transform: translateY(-50%);
+                z-index: 5;
+            }
+
+            /* Logo maior e centralizado (apenas mobile) */
+            .header-container {
+                position: relative;
+                justify-content: center;
+                padding: 10px 20px;
+            }
+
+            .logo {
+                height: 92px;
+            }
+
+            .logo-wrapper:hover {
+                transform: none;
             }
 
             section {
-                padding: 60px 0;
+                padding: 42px 0;
             }
 
             .catalogo {
-                padding: 60px 0;
+                padding: 42px 0;
             }
 
+            /* Cards agrupados 2 em 2 no celular */
             .equipamentos-grid,
             .servicos-grid,
             .aplicacoes-grid,
-            .depoimentos-grid,
             .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 14px;
+            }
+
+            .depoimentos-grid {
                 grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            /* Compactação dos cards */
+            .equip-card-image {
+                height: 150px;
+            }
+
+            .equip-card-content {
+                padding: 18px 16px;
+            }
+
+            .equip-card-content h3 {
+                font-size: 22px;
+                margin-bottom: 8px;
+            }
+
+            .equip-card-content p {
+                font-size: 13.5px;
+                margin-bottom: 14px;
+            }
+
+            .equip-specs {
+                gap: 8px;
+                margin-bottom: 16px;
+            }
+
+            .equip-spec {
+                font-size: 11px;
+                padding: 5px 9px;
+            }
+
+            .servico-card {
+                padding: 24px 18px;
+            }
+
+            .servico-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 22px;
+                margin-bottom: 16px;
+            }
+
+            .servico-card h3 {
+                font-size: 19px;
+            }
+
+            .servico-card p {
+                font-size: 13px;
+            }
+
+            .aplicacao-item {
+                padding: 20px 16px;
+                gap: 12px;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .aplicacao-item i {
+                font-size: 28px;
+            }
+
+            .aplicacao-item h4 {
+                font-size: 16px;
+            }
+
+            .aplicacao-item p {
+                font-size: 11.5px;
+            }
+
+            .section-header {
+                margin-bottom: 32px;
+            }
+
+            .depoimento-card {
+                padding: 26px 22px;
+            }
+
+            .depoimento-text {
+                font-size: 14px;
+                margin-bottom: 18px;
             }
 
             .form-row {
@@ -1852,70 +2046,168 @@
                 text-align: center;
             }
 
-            /* HERO mobile: imagem panorâmica recortada para não ficar achatada */
+            /* Horário some da topbar no celular (já consta em Contato e Rodapé) */
+            .topbar-info span:nth-child(3) {
+                display: none;
+            }
+
+            .topbar-social {
+                display: none;
+            }
+
+            /* HERO mobile: compactado */
             .hero {
-                padding-top: 48px;
+                padding-top: 34px;
             }
 
             .hero-container {
-                padding: 0 20px 36px;
+                padding: 0 20px 26px;
+            }
+
+            .hero h1 {
+                margin-bottom: 16px;
+            }
+
+            .hero-tag {
+                margin-bottom: 18px;
             }
 
             .hero p {
-                font-size: 16px;
-                margin-bottom: 28px;
+                font-size: 15px;
+                margin-bottom: 22px;
             }
 
             .hero-image-real {
-                height: 260px;
+                height: 200px;
                 object-fit: cover;
                 object-position: center 40%;
             }
 
             .hero-buttons {
-                flex-direction: column;
+                flex-direction: row;
                 width: 100%;
+                gap: 10px;
             }
 
             .btn {
                 justify-content: center;
-                width: 100%;
+                flex: 1;
+                padding: 14px 12px;
+                font-size: 13px;
+                gap: 6px;
             }
 
             .hero-badge {
-                bottom: 14px;
-                right: 14px;
-                padding: 10px 16px;
-                font-size: 13px;
+                bottom: 12px;
+                right: 12px;
+                padding: 8px 13px;
+                font-size: 11px;
                 border-width: 2px;
             }
 
             .hero-badge strong {
-                font-size: 22px;
+                font-size: 18px;
+            }
+
+            .cta-section {
+                padding: 42px 0;
             }
 
             .cta-container {
                 flex-direction: column;
                 text-align: center;
+                gap: 22px;
             }
 
             .cta-actions {
                 width: 100%;
-                flex-direction: column;
+                flex-direction: row;
+                gap: 10px;
             }
 
             .contato-form {
-                padding: 28px 22px;
+                padding: 26px 20px;
+            }
+
+            .sobre-grid {
+                gap: 26px;
+            }
+
+            .sobre-image-box {
+                aspect-ratio: 16/10;
             }
 
             .sobre-stats {
                 left: 12px;
-                bottom: -20px;
-                padding: 18px 24px;
+                bottom: -18px;
+                padding: 14px 20px;
             }
 
             .sobre-stats strong {
-                font-size: 38px;
+                font-size: 32px;
+            }
+
+            .sobre-content > p {
+                font-size: 14.5px;
+                margin-bottom: 16px;
+            }
+
+            .sobre-list li {
+                font-size: 14px;
+                margin-bottom: 10px;
+            }
+
+            .sobre-list {
+                margin-bottom: 22px;
+            }
+
+            /* Rodapé compacto */
+            footer {
+                padding: 42px 0 0;
+            }
+
+            .footer-grid {
+                gap: 26px 14px;
+                margin-bottom: 30px;
+            }
+
+            .footer-col:first-child {
+                grid-column: 1 / -1;
+            }
+
+            .footer-col p {
+                font-size: 13px;
+            }
+
+            .footer-col h4 {
+                font-size: 19px;
+                margin-bottom: 14px;
+            }
+
+            .footer-col ul a,
+            .footer-contact-list li {
+                font-size: 13px;
+            }
+
+            .footer-col ul li {
+                margin-bottom: 7px;
+            }
+
+            /* Contato compacto */
+            .contato-list li {
+                margin-bottom: 16px;
+                gap: 14px;
+            }
+
+            .contato-list i {
+                width: 40px;
+                height: 40px;
+                font-size: 15px;
+            }
+
+            .contato-info > p {
+                margin-bottom: 24px;
+                font-size: 14.5px;
             }
 
             .marcas {
@@ -1925,9 +2217,13 @@
 
         /* ===== CELULAR PEQUENO ===== */
         @media (max-width: 480px) {
+            .diferenciais-bar {
+                padding: 22px 0;
+            }
+
             .diferenciais-container {
-                grid-template-columns: 1fr;
-                gap: 18px;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px 10px;
             }
 
             .diferencial-item::after {
@@ -1935,15 +2231,30 @@
             }
 
             .diferencial-item {
-                padding: 4px 0;
+                padding: 0;
+                gap: 10px;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .diferencial-item i {
+                font-size: 26px;
+            }
+
+            .diferencial-item h4 {
+                font-size: 15px;
+            }
+
+            .diferencial-item p {
+                font-size: 11px;
             }
 
             .logo {
-                height: 46px;
+                height: 78px;
             }
 
             .header-container {
-                padding: 10px 16px;
+                padding: 8px 16px;
             }
 
             .container,
@@ -1954,11 +2265,16 @@
 
             .topbar-info {
                 flex-direction: column;
-                gap: 6px;
+                gap: 5px;
+            }
+
+            .topbar {
+                padding: 6px 0;
+                font-size: 11.5px;
             }
 
             .hero-image-real {
-                height: 210px;
+                height: 170px;
             }
 
             .hero-tag {
@@ -1967,12 +2283,12 @@
             }
 
             .section-subtitle {
-                font-size: 15px;
+                font-size: 14px;
             }
 
             .btn {
-                padding: 15px 24px;
-                font-size: 14px;
+                padding: 13px 10px;
+                font-size: 12.5px;
             }
 
             .whatsapp-float {
@@ -2076,7 +2392,7 @@
                  class="hero-image-real"
                  loading="eager">
             <div class="hero-badge">
-                +<strong>15</strong>ANOS<br>NO MERCADO
+                +<strong>5</strong>ANOS<br>NO MERCADO
             </div>
         </div>
     </section>
@@ -2564,58 +2880,6 @@
         </div>
     </section>
 
-    <!-- DEPOIMENTOS -->
-    <section class="depoimentos">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Depoimentos</span>
-                <h2 class="section-title">O que dizem nossos <span class="destaque">Clientes</span></h2>
-            </div>
-
-            <div class="depoimentos-grid">
-                <div class="depoimento-card">
-                    <div class="depoimento-stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                    </div>
-                    <p class="depoimento-text">Atendimento excepcional! A plataforma chegou em perfeitas condições e atendeu todas as nossas necessidades. Serviço profissional do início ao fim.</p>
-                    <div class="depoimento-author">
-                        <div class="depoimento-avatar">CM</div>
-                        <div>
-                            <h5>Carlos Mendes</h5>
-                            <span>Engenheiro Civil</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="depoimento-card">
-                    <div class="depoimento-stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                    </div>
-                    <p class="depoimento-text">Frota moderna, suporte rápido e preço justo. A Metal Loc se tornou parceira oficial das nossas operações de manutenção predial. Recomendo!</p>
-                    <div class="depoimento-author">
-                        <div class="depoimento-avatar">AS</div>
-                        <div>
-                            <h5>Ana Silva</h5>
-                            <span>Gestora de Facilities</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="depoimento-card">
-                    <div class="depoimento-stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                    </div>
-                    <p class="depoimento-text">Equipe técnica muito qualificada e equipamentos sempre revisados. Reduzimos significativamente os custos da nossa operação. Excelente parceria!</p>
-                    <div class="depoimento-author">
-                        <div class="depoimento-avatar">RP</div>
-                        <div>
-                            <h5>Roberto Pereira</h5>
-                            <span>Diretor Industrial</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- CONTATO -->
     <section class="contato" id="contato">
         <div class="container">
@@ -2804,6 +3068,16 @@
             if (mensagem) texto += `*Detalhes:* ${mensagem}%0A`;
 
             const url = `https://wa.me/5561992886995?text=${texto}`;
+
+            // Rastreia a conversão principal: formulário de orçamento enviado
+            if (typeof gtag === 'function') {
+                gtag('event', 'gerar_lead', {
+                    event_category: 'conversao',
+                    event_label: equipamento,
+                    value: 10
+                });
+            }
+
             window.open(url, '_blank');
         }
 
@@ -2829,6 +3103,67 @@
             } else {
                 header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.3)';
             }
+        });
+
+        /* ============================================================
+           RASTREAMENTO DE CONVERSÕES (Google Analytics / Google Ads)
+           Registra cada clique que representa um contato comercial.
+           ============================================================ */
+        function rastrear(evento, detalhes) {
+            if (typeof gtag === 'function') {
+                gtag('event', evento, detalhes || {});
+            }
+        }
+
+        // Cliques em qualquer link de WhatsApp
+        document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
+            link.addEventListener('click', () => {
+                let origem = 'outro';
+                if (link.classList.contains('whatsapp-float')) origem = 'botao_flutuante';
+                else if (link.closest('.hero')) origem = 'hero';
+                else if (link.closest('.cta-section')) origem = 'cta';
+                else if (link.closest('.contato')) origem = 'secao_contato';
+
+                rastrear('clique_whatsapp', {
+                    event_category: 'contato',
+                    event_label: origem,
+                    value: 1
+                });
+            });
+        });
+
+        // Cliques no telefone
+        document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+            link.addEventListener('click', () => {
+                rastrear('clique_telefone', {
+                    event_category: 'contato',
+                    event_label: 'ligacao',
+                    value: 1
+                });
+            });
+        });
+
+        // Cliques no e-mail
+        document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
+            link.addEventListener('click', () => {
+                rastrear('clique_email', {
+                    event_category: 'contato',
+                    event_label: 'email',
+                    value: 1
+                });
+            });
+        });
+
+        // Cliques em "Solicitar Orçamento" / "Ver Detalhes" dos equipamentos
+        document.querySelectorAll('.equip-card-link, .cat-link').forEach(link => {
+            link.addEventListener('click', () => {
+                const card = link.closest('.equip-card, .cat-card');
+                const titulo = card ? (card.querySelector('h3')?.innerText || '').replace(/\s+/g, ' ').trim() : 'desconhecido';
+                rastrear('interesse_equipamento', {
+                    event_category: 'engajamento',
+                    event_label: titulo
+                });
+            });
         });
     </script>
 </body>
